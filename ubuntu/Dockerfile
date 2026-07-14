@@ -17,17 +17,7 @@ RUN apt-get update \
     && rm -rf /usr/share/doc \
     && rm -rf /usr/share/man
 
-
-RUN rm -f /lib/systemd/system/multi-user.target.wants/* \
-    /etc/systemd/system/*.wants/* \
-    /lib/systemd/system/getty.target \
-    /lib/systemd/system/local-fs.target.wants/* \
-    /lib/systemd/system/sockets.target.wants/*udev* \
-    /lib/systemd/system/sockets.target.wants/*initctl* \
-    /lib/systemd/system/sysinit.target.wants/systemd-tmpfiles-setup* \
-    /lib/systemd/system/systemd-update-utmp* \
-    /lib/systemd/system/systemd*udev*
-
+RUN rm -f /lib/systemd/system/systemd*udev* /lib/systemd/system/getty.target
 
 VOLUME ["/sys/fs/cgroup"]
-CMD ["/lib/systemd/systemd"]
+ENTRYPOINT ["/lib/systemd/systemd"]
